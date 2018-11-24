@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title>Dish Generator</title>
+</head>
+<body>
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
+
+<form action="" method="post">
+    {{ form.csrf }}
+    
+    <table class="input" style="width:100%">
+    <tr>
+        <th>Label</th>
+        <th>Value</th>
+    </tr>
+    {% for field in form %}
+        <tr>
+            <td>{{ field.label }}</td>
+            <td>{{ field() }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+</form>
+
+</br>
+<div>
+SQL query:
+{% if query %}
+    {{ query }}
+{% endif %}
+</div>
+</br>
+
+<table style="width:100%">
+    {% if result %}
+    <tr>
+        <th>Title</th>
+        <th>Recipe</th>
+    </tr>
+    {% for row in result %}
+    <tr>
+        <td> {{ row.title }}</td>
+        <td>
+            <a href={{ row.link.link }}>{{ row.link.name }}</a>
+            </br> 
+            {{ row.link.description }}
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+</body>
+</html>
