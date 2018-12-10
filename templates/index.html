@@ -40,12 +40,52 @@ tr:nth-child(even) {
         <th>Label</th>
         <th>Value</th>
     </tr>
-    {% for field in form %}
-        <tr>
-            <td>{{ field.label }}</td>
-            <td>{{ field() }}</td>
-        </tr>
-    {% endfor %}
+
+    <tr>
+        <td>{{ form.name.label }}</td>
+        <td>{{ form.name() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.ingredients.label }}</td>
+        <td>{{ form.ingredients() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.occasions.label }}</td>
+        <td>{{ form.occasions() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.breakfast.label }}</td>
+        <td>{{ form.breakfast() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.brunch.label }}</td>
+        <td>{{ form.brunch() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.lunch.label }}</td>
+        <td>{{ form.lunch() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.dinner.label }}</td>
+        <td>{{ form.dinner() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.dessert.label }}</td>
+        <td>{{ form.dessert() }}</td>
+    </tr>
+
+    <tr>
+        <td>{{ form.submit.label }}</td>
+        <td>{{ form.submit() }}</td>
+    </tr>
+
     </table>
 
 </form>
