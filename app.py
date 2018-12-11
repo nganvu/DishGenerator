@@ -97,16 +97,25 @@ def employees():
                 query += " and timing.`{}` = true".format(time)
 
         calories = request.form["calories"]
-        if calories:
-            query += " and nutrition.calories < {}".format(calories)
+        mincalories = request.form["mincalories"]
+        if calories and mincalories:
+            query += " and nutrition.calories between {} and {}"\
+                .format(mincalories, calories)
+
         protein = request.form["protein"]
+        minprotein = request.form["minprotein"]
         if protein:
-            query += " and nutrition.protein < {}".format(protein)
+            query += " and nutrition.protein between {} and {}"\
+                .format(minprotein, protein)
+
+        fat = request.form["fat"]
+        minfat = request.form["minfat"] 
         fat = request.form["fat"]
         if fat:
-            query += " and nutrition.fat < {}".format(fat)
+            query += " and nutrition.fat between {} and {}"\
+                .format(minfat, fat)
 
-        query += " order by rand() limit 1"
+        query += " order by rand() limit 3"
 
         print(query)
 
