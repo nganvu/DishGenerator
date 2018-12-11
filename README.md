@@ -1,3 +1,5 @@
+![Alt text](interface.png?raw=true "App Interface")
+
 # Usage
 * Navigate to the project directory, then execute the following command line to import the database:
 ```
