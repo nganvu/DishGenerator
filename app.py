@@ -1,7 +1,8 @@
 from flask import Flask, render_template, flash, request
-from wtforms import Form, BooleanField, TextField, TextAreaField, validators, StringField, SubmitField
+from wtforms import Form, BooleanField, IntegerField, TextField, TextAreaField, validators, StringField, SubmitField
 import pymysql
 from google import google
+from pprint import pprint
 
 import sys  
 reload(sys)  
@@ -22,6 +23,7 @@ class ReusableForm(Form):
     lunch = BooleanField()
     dinner = BooleanField()
     dessert = BooleanField()
+    calories = IntegerField()
     submit = SubmitField()
 
 class Database:
@@ -62,10 +64,13 @@ def employees():
 
     if request.method == "POST":
         query = \
-            "select main.title from main\
+            "select main.title, nutrition.calories from main\
             inner join timing on main.dish_idx = timing.dish_idx\
             inner join ingredient on main.dish_idx = ingredient.dish_idx\
-            inner join occasion on main.dish_idx = occasion.dish_idx"
+            inner join occasion on main.dish_idx = occasion.dish_idx\
+            inner join nutrition on main.dish_idx = occasion.dish_idx"
+
+        pprint(vars(request))
 
         name = request.form["name"]
         if name:
@@ -87,8 +92,12 @@ def employees():
         for time in timing:
             if time in request.form:
                 query += " and timing.`{}` = true".format(time)
-        
-        query += " order by rand() limit 2"
+
+        calories = request.form["calories"]
+        if calories:
+            query += " and nutrition.calories < {}".format(calories)
+
+        query += " order by rand() limit 3"
 
         if form.validate():
             res = db_query(query)
