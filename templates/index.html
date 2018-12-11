@@ -77,36 +77,64 @@ tr:nth-child(even) {
     </tr>
 
     <tr>
-        <td><label for="calories">Calories</label></td>
+        <td>Nutrition</td>
         <td>
-            <div class="container">
-            <!-- <input type="range" id="start" name="calories" min="0" max="2500" list="tickmarks">
-            <datalist id="tickmarks">
-                <option value="0" label="0">
-                <option value="500" label="500">
-                <option value="1000" label="1000">
-                <option value="1500" label="1500">
-                <option value="2000" label="2000">
-                <option value="2500" label="2500">
-            </datalist> -->
-            <input type="range" name="calories" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
-            <datalist id="tickmarks">
-            <option>0</option>
-            <option>500</option>
-            <option>1000</option>
-            <option>1500</option>
-            <option>2000</option>
-            <option>2500</option>
-            </datalist>
-            <output id="output" for="rangeInput">1500</output>
-            </div>
-        </td>
+            <table class="input" style="width:100%">
+
+            <tr>
+                <td><label for="calories">Calories (cal)</label>
+                <div class="container">
+                <input type="range" name="calories" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
+                <datalist id="tickmarks">
+                <option>0</option>
+                <option>500</option>
+                <option>1000</option>
+                <option>1500</option>
+                <option>2000</option>
+                <option>2500</option>
+                </datalist>
+                <output id="output" for="rangeInput">1500</output>
+                </div>
+                </td>
+
+                <td><label for="calories">Protein (gram)</label>
+                <div class="container">
+                <input type="range" name="protein" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
+                <datalist id="tickmarks">
+                <option>0</option>
+                <option>500</option>
+                <option>1000</option>
+                <option>1500</option>
+                <option>2000</option>
+                <option>2500</option>
+                </datalist>
+                <output id="output" for="rangeInput">1500</output>
+                </div>
+                </td>
+
+                <td><label for="calories">Fat (gram)</label>
+                <div class="container">
+                <input type="range" name="fat" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
+                <datalist id="tickmarks">
+                <option>0</option>
+                <option>500</option>
+                <option>1000</option>
+                <option>1500</option>
+                <option>2000</option>
+                <option>2500</option>
+                </datalist>
+                <output id="output" for="rangeInput">1500</output>
+                </div>
+                </td>
+            </tr>
+            
+            </table>
             
         </td>
     </tr>
 
     <tr>
-        <td>{{ form.submit.label }}</td>
+        <td>Show me dish ideas!</td>
         <td>{{ form.submit() }}</td>
     </tr>
 
@@ -128,7 +156,9 @@ SQL query:
     <tr>
         <th>Title</th>
         <th>Recipe</th>
-        <th>Calories</th>
+        <th>Calories (cal)</th>
+        <th>Protein (gram)</th>
+        <th>Fat (gram)</th>
     </tr>
     {% for row in result %}
     <tr>

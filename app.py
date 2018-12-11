@@ -24,6 +24,8 @@ class ReusableForm(Form):
     dinner = BooleanField()
     dessert = BooleanField()
     calories = IntegerField()
+    protein = IntegerField()
+    fat = IntegerField()
     submit = SubmitField()
 
 class Database:
@@ -70,7 +72,7 @@ def employees():
             inner join occasion on main.dish_idx = occasion.dish_idx\
             inner join nutrition on main.dish_idx = occasion.dish_idx"
 
-        pprint(vars(request))
+        pprint(vars(request.form))
 
         name = request.form["name"]
         if name:
@@ -96,8 +98,16 @@ def employees():
         calories = request.form["calories"]
         if calories:
             query += " and nutrition.calories < {}".format(calories)
+        protein = request.form["protein"]
+        if protein:
+            query += " and nutrition.protein < {}".format(protein)
+        fat = request.form["fat"]
+        if fat:
+            query += " and nutrition.fat < {}".format(fat)
 
         query += " order by rand() limit 3"
+
+        print(query)
 
         if form.validate():
             res = db_query(query)
