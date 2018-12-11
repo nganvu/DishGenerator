@@ -54,7 +54,56 @@ tr:nth-child(even) {
 
     <tr>
         <td>{{ form.occasions.label }}</td>
-        <td>{{ form.occasions() }}</td>
+        <td><!-- {{ form.occasions()}} -->
+            <select class="input" name="occasions">
+                <option value="anniversary">anniversary</option>
+                <option value="back to school">back to school</option>
+                <option value="backyard bbq">backyard bbq</option>
+                <option value="bastille day">bastille day</option>
+                <option value="birthday">birthday</option>
+                <option value="camping">camping</option>
+                <option value="christmas">christmas</option>
+                <option value="christmas eve">christmas eve</option>
+                <option value="cinco de mayo">cinco de mayo</option>
+                <option value="cocktail party">cocktail party</option>
+                <option value="diwali">diwali</option>
+                <option value="easter">easter</option>
+                <option value="father's day">father's day/option>
+                <option value="fourth of july">fourth of july</option>
+                <option value="friendsgiving">friendsgiving</option>
+                <option value="graduation">graduation</option>
+                <option value="hanukkah">hanukkah</option>
+                <option value="kentucky derby">kentucky derby</option>
+                <option value="kwanzaa">kwanzaa</option>
+                <option value="labor day">labor day</option>
+                <option value="lunar new year">lunar new year</option>
+                <option value="mardi gras">mardi gras</option>
+                <option value="mother's day">mother's day</option>
+                <option value="new year's day">new year's day</option>
+                <option value="oktoberfest">oktoberfest</option>
+                <option value="oscars">oscars</option>
+                <option value="parade">parade</option>
+                <option value="party">party</option>
+                <option value="passover">passover</option>
+                <option value="persian new year">persian new year</option>
+                <option value="picnic">picnic</option>
+                <option value="poker/game night">poker/game night</option>
+                <option value="potluck">potluck</option>
+                <option value="purim">purim</option>
+                <option value="ramadan">ramadan</option>
+                <option value="rosh hashanah/yom kippur">rosh hashanah/yom kippur</option>
+                <option value="shavuot">shavuot</option>
+                <option value="spring">spring</option>
+                <option value="st. patrick's day">st. patrick's day</option>
+                <option value="sukkot">sukkot</option>
+                <option value="summer">summer</option>
+                <option value="tailgating">tailgating</option>
+                <option value="thanksgiving">thanksgiving</option>
+                <option value="valentine's day">valentine's day</option>
+                <option value="wedding">wedding</option>
+                <option value="winter">winter</option>
+            </select>
+        </td>
     </tr>
 
     <tr>
@@ -63,13 +112,9 @@ tr:nth-child(even) {
             <table class="input" style="width:100%">
             <tr>
                 <td>{{ form.breakfast.label }}{{ form.breakfast() }}</td>
-
                 <td>{{ form.brunch.label }}{{ form.brunch() }}</td>
-
                 <td>{{ form.lunch.label }}{{ form.lunch() }}</td>
-
                 <td>{{ form.dinner.label }}{{ form.dinner() }}</td>
-
                 <td>{{ form.dessert.label }}{{ form.dessert() }}</td>
             </tr>
             </table>
