@@ -1,8 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
+@font-face {
+font-family: "Glamour Brush";
+src: 
+url("static/glamour_brush.otf") format("opentype");
+}
+
+* {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color: white;
+}
+
 table {
-    font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
@@ -13,8 +23,17 @@ td, th {
     padding: 8px;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
+body, html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(static/background.jpg);
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-repeat: repeat-y;
 }
 
 </style>
@@ -23,6 +42,9 @@ tr:nth-child(even) {
     <title>Dish Generator</title>
 </head>
 <body>
+<div class="banner">
+    <img src="static/banner.png" alt="banner" style="width: 100%">
+</div>
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
         <ul>
@@ -37,25 +59,23 @@ tr:nth-child(even) {
     {{ form.csrf }}
     
     <table class="input" style="width:100%">
-    <tr>
-        <th>Label</th>
-        <th>Value</th>
-    </tr>
 
     <tr>
-        <td>{{ form.name.label }}</td>
-        <td>{{ form.name() }}</td>
-    </tr>
+        <td>Name contains...</td>
+        <td>
+            <input id="name" name="name" type="text" value=""
+            style="color: black;">
+        </td>
 
-    <tr>
         <td>{{ form.ingredients.label }}</td>
-        <td>{{ form.ingredients() }}</td>
-    </tr>
+        <td>
+            <input id="ingredients" name="ingredients" type="text" value=""
+            style="color: black;">
+        </td>
 
-    <tr>
         <td>{{ form.occasions.label }}</td>
         <td><!-- {{ form.occasions()}} -->
-            <select class="input" name="occasions">
+            <select class="input" name="occasions" style="color: black;">
                 <option value="anniversary">anniversary</option>
                 <option value="back to school">back to school</option>
                 <option value="backyard bbq">backyard bbq</option>
@@ -108,14 +128,24 @@ tr:nth-child(even) {
 
     <tr>
         <td>Meal of the day</td>
-        <td>
+        <td colspan="5">
             <table class="input" style="width:100%">
-            <tr>
-                <td>{{ form.breakfast.label }}{{ form.breakfast() }}</td>
-                <td>{{ form.brunch.label }}{{ form.brunch() }}</td>
-                <td>{{ form.lunch.label }}{{ form.lunch() }}</td>
-                <td>{{ form.dinner.label }}{{ form.dinner() }}</td>
-                <td>{{ form.dessert.label }}{{ form.dessert() }}</td>
+            <tr style="background-color: rgba(0, 0, 0, 0);">
+                <td style="border: 0px">
+                {{ form.breakfast.label }}{{ form.breakfast() }}
+                </td>
+                <td style="border: 0px">
+                {{ form.brunch.label }}{{ form.brunch() }}
+                </td>
+                <td style="border: 0px">
+                {{ form.lunch.label }}{{ form.lunch() }}
+                </td>
+                <td style="border: 0px">
+                {{ form.dinner.label }}{{ form.dinner() }}
+                </td>
+                <td style="border: 0px">
+                {{ form.dessert.label }}{{ form.dessert() }}
+                </td>
             </tr>
             </table>
         </td>
@@ -123,14 +153,18 @@ tr:nth-child(even) {
 
     <tr>
         <td>Nutrition</td>
-        <td>
-            <table class="input" style="width:100%">
+        <td colspan="5">
+            <table class="input" style="width:100%, border: 0px">
 
-            <tr>
-                <td><label for="calories">Calories (cal)</label>
+            <tr style="background-color: rgba(0, 0, 0, 0);">
+                <td style="border: 0px; width: 33.33%;">
+                <label for="calories">Calories (cal)</label>
                 <div class="container">
-                <input type="range" name="calories" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
-                <datalist id="tickmarks">
+                <input type="range" name="calories" min="0" max="2500"
+                    value="1500" step="100" list="caloriesTickmarks"
+                    id="caloriesInput"
+                    oninput="caloriesOutput.value = caloriesInput.value">
+                <datalist id="caloriesTickmarks">
                 <option>0</option>
                 <option>500</option>
                 <option>1000</option>
@@ -138,37 +172,47 @@ tr:nth-child(even) {
                 <option>2000</option>
                 <option>2500</option>
                 </datalist>
-                <output id="output" for="rangeInput">1500</output>
+                <output id="caloriesOutput" for="caloriesInput">1500</output>
                 </div>
                 </td>
 
-                <td><label for="calories">Protein (gram)</label>
+                <td style="border: 0px; width: 33.33%;">
+                <label for="calories">Protein (gram)</label>
                 <div class="container">
-                <input type="range" name="protein" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
-                <datalist id="tickmarks">
+                <input type="range" name="protein" min="0" max="180"
+                    value="60" step="10" list="proteinTickmarks"
+                    id="proteinInput"
+                    oninput="proteinOutput.value = proteinInput.value">
+                <datalist id="proteinTickmarks">
                 <option>0</option>
-                <option>500</option>
-                <option>1000</option>
-                <option>1500</option>
-                <option>2000</option>
-                <option>2500</option>
+                <option>30</option>
+                <option>60</option>
+                <option>90</option>
+                <option>120</option>
+                <option>150</option>
+                <option>180</option>
                 </datalist>
-                <output id="output" for="rangeInput">1500</output>
+                <output id="proteinOutput" for="proteinInput">180</output>
                 </div>
                 </td>
 
-                <td><label for="calories">Fat (gram)</label>
+                <td style="border: 0px; width: 33.33%;">
+                <label for="calories">Fat (gram)</label>
                 <div class="container">
-                <input type="range" name="fat" min="0" max="2500" value="1500" step="100" list="tickmarks" id="rangeInput" oninput="output.value = rangeInput.value">
-                <datalist id="tickmarks">
+                <input type="range" name="fat" min="0" max="180"
+                    value="60" step="10" list="fatTickmarks"
+                    id="fatInput"
+                    oninput="fatOutput.value = fatInput.value">
+                <datalist id="fatTickmarks">
                 <option>0</option>
-                <option>500</option>
-                <option>1000</option>
-                <option>1500</option>
-                <option>2000</option>
-                <option>2500</option>
+                <option>30</option>
+                <option>60</option>
+                <option>90</option>
+                <option>120</option>
+                <option>150</option>
+                <option>180</option>
                 </datalist>
-                <output id="output" for="rangeInput">1500</output>
+                <output id="fatOutput" for="fatInput">180</output>
                 </div>
                 </td>
             </tr>
@@ -177,27 +221,49 @@ tr:nth-child(even) {
             
         </td>
     </tr>
-
-    <tr>
-        <td>Show me dish ideas!</td>
-        <td>{{ form.submit() }}</td>
-    </tr>
-
     </table>
 
+    <div style="text-align: center;">
+        <input id="submit" name="submit" type="submit" value="Show me my dish!"
+        style="color: black;">
+    </div>
+    
 </form>
 
 </br>
-<div>
+<!-- <div>
 SQL query:
 {% if query %}
     {{ query }}
 {% endif %}
-</div>
+</div> -->
 </br>
 
+{% if result %}
+<div style="text-align: center;">
+{% for row in result %}
+<div style="font-family: 'Glamour Brush'; font-size: 4em">{{ row.title }}!</div>
 <table style="width:100%">
+    <td style="border: 0px; width: 27.5%;"></td>
+    <td style="border: 0px; width: 15%;">
+         Calories: {{ row.calories }} cal
+     </td>
+    <td style="border: 0px; width: 15%; text-align: center;">
+         Protein: {{ row.protein }} gram
+     </td>
+    <td style="border: 0px; width: 15%; text-align: center;">
+         Fat: {{ row.fat }} gram
+     </td>
+    <td style="border: 0px; width: 27.5%; text-align: center;"></td>
+</table>
+<a href={{ row.link.link }}>Check out a recipe here!</a>
+{% endfor %}
+</div>
+{% endif %}
+
+<!-- <table style="width:100%">
     {% if result %}
+
     <tr>
         <th>Title</th>
         <th>Recipe</th>
@@ -209,14 +275,16 @@ SQL query:
     <tr>
         <td> {{ row.title }}</td>
         <td>
-            <a href={{ row.link.link }}>{{ row.link.name }}</a>
+            <a href={{ row.link.link }}>{{ row.link.name }}></a>
             </br> 
             {{ row.link.description }}
         </td>
         <td> {{ row.calories }}</td>
+        <td> {{ row.protein }}</td>
+        <td> {{ row.fat }}</td>
     </tr>
     {% endfor %}
     {% endif %}
-</table>
+</table> -->
 </body>
 </html>

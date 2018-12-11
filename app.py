@@ -66,11 +66,12 @@ def employees():
 
     if request.method == "POST":
         query = \
-            "select main.title, nutrition.calories from main\
+            "select main.title,\
+            nutrition.calories, nutrition.protein, nutrition.fat from main\
             inner join timing on main.dish_idx = timing.dish_idx\
             inner join ingredient on main.dish_idx = ingredient.dish_idx\
             inner join occasion on main.dish_idx = occasion.dish_idx\
-            inner join nutrition on main.dish_idx = occasion.dish_idx"
+            inner join nutrition on main.dish_idx = nutrition.dish_idx"
 
         pprint(vars(request.form))
 
@@ -105,7 +106,7 @@ def employees():
         if fat:
             query += " and nutrition.fat < {}".format(fat)
 
-        query += " order by rand() limit 3"
+        query += " order by rand() limit 1"
 
         print(query)
 
